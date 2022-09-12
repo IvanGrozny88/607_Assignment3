@@ -1,0 +1,68 @@
+---
+title: "607_Assignment3"
+author: "IvanTikhonov"
+date: "2022-09-11"
+output: html_document
+---
+#1. Using the 173 majors listed in fivethirtyeight.com’s College Majors dataset [https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/], provide code that identifies the majors that contain either "DATA" or "STATISTICS"
+
+
+
+```{r}
+
+data_majors<- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/college-majors/majors-list.csv", header = TRUE, sep = ",")
+grep(pattern = 'STATISTICS|DATA', data_majors$Major, value = TRUE, ignore.case = TRUE)
+
+```
+There is one major with "data" in the major name. There are two majors with "statistics" in the major name.
+#2 Write code that transforms the data below:
+
+[1] "bell pepper"  "bilberry"     "blackberry"   "blood orange"
+
+[5] "blueberry"    "cantaloupe"   "chili pepper" "cloudberry"
+
+[9] "elderberry"   "lime"         "lychee"       "mulberry" 
+
+[13] "olive"        "salal berry"
+
+Into a format like this:
+
+c("bell pepper", "bilberry", "blackberry", "blood orange", "blueberry", "cantaloupe", "chili pepper", "cloudberry", "elderberry", "lime", "lychee", "mulberry", "olive", "salal berry")
+
+
+
+```{r}
+Strings <- '[1] "bell pepper"  "bilberry"     "blackberry"   "blood orange"
+[5] "blueberry"    "cantaloupe"   "chili pepper" "cloudberry"
+[9] "elderberry"   "lime"         "lychee"       "mulberry" 
+[13] "olive"        "salal berry"'
+
+newString <- stringr::str_extract_all(Strings, pattern = '[A-Za-z]+.?[A-Za-z]+')
+suppressWarnings(GreatJob <- stringr::str_c(newString, collapse = ", "))
+```
+The two exercises below are taken from R for Data Science, 14.3.5.1 in the on-line version:
+
+#3 Describe, in words, what these expressions will match:
+1.(.)\1\1
+This will characters that are three times in a row.
+2."(.)(.)\\2\\1"
+It is will match any four characters that read the same forward and backward.
+3.(..)\1
+This will match two characters repeated.
+4."(.).\\1.\\1"
+Match five characters where the first, third and fifth are the same and the second and fourth can be anything.
+5."(.)(.)(.).*\\3\\2\\1"
+It will match six or more characters where the first three characters are the same as the last three in reverse order.
+
+
+#4 Construct regular expressions to match words that:
+1.Start and end with the same character.
+(.)[a-z]*\1
+2.Contain a repeated pair of letters (e.g. "church" contains "ch" repeated twice.)
+([a-z]{2})[a-z*\1]
+3.Contain one letter repeated in at least three places (e.g. "eleven" contains three "e"s.)
+a-z[a-z]\1[a-z]\1[a-z]
+```{r}
+
+```
+
